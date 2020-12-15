@@ -5,10 +5,10 @@
 #include "fichier.h"
 
 
-#define BUFFER 1000
-#define TAILLE_MAX 6000
+#define BUFFER 100000
+#define TAILLE_MAX 100000
 
-#define LIGNE_MAX 6000
+#define LIGNE_MAX 100000
 
 int compter_lignes(char *nomFichier){
 	FILE *pFi;
@@ -55,7 +55,7 @@ void ecrire_fichier(char *nomFichier, char * texte){
    	fprintf (stderr, "Impossible d'ouvrir %s \n", nomFichier);
   	return;
   }
-  fprintf(pt_fichier, "%s \n",texte);
+  fprintf(pt_fichier, "%s",texte);
  	fclose(pt_fichier);
 	return;
 }

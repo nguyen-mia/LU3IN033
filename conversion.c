@@ -19,7 +19,7 @@ long int hex_to_dec (char *hex){
     int i = 0, len;
 
     decimal = 0;
-
+    if(hex == NULL) return -1; 
     /* Find the length of total number of hex digit */
     len = strlen(hex);
     len--;

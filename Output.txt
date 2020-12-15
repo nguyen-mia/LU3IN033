@@ -1,4 +1,8 @@
 
+--------------------------------- WARNING /ERROR ---------------------------------
+Aucune erreur :)
+
+--------------------------------- TRAME 1 ---------------------------------
 ETHERNET (2) 
    | Destination MAC address : 70.fc.8f.9a.97.c5 (0x 70 fc 8f 9a 97 c5)
    | Source MAC address : 40.ec.99.b8.aa.e2 (0x 40 ec 99 b8 aa e2)
@@ -51,3 +55,226 @@ HYPERTEXT TRANSFER PROTOCOL (7)
    | Connection: Keep-Alive
    | 
    | 
+
+--------------------------------- TRAME 2 ---------------------------------
+ETHERNET (2) 
+   | Destination MAC address : 70.fc.8f.9a.97.c5 (0x 70 fc 8f 9a 97 c5)
+   | Source MAC address : 40.ec.99.b8.aa.e2 (0x 40 ec 99 b8 aa e2)
+   | EtherType : Internet Protocol version 4 - IPv4 (0x 08 00)
+
+INTERNET PROTOCOL VERSION 4 (3) 
+   | Version: 4 (0x 4)
+   | IP Header Length: 20 (0x 5) (without option)
+   | Type Of Service: Oxb8 
+   | Total Length: 341 (0x 0155)
+   | Identification: 10582 (0x 2956)
+   | Flags :(0x 4)
+      | DF = 1
+      | MF = 0
+   | Fragment Offset : 0 (0x 000)
+   | TTL : 128 (0x 80)
+   | Protocol : 6 - TCP (0x 06)
+   | Header Checksum : 0 (0x 00 00)
+   | Source IP address : 192.168.1.3  (0x c0 a8 01 03) 
+   | Destination IP address : 44.236.72.93  (0x 2c ec 48 5d) 
+
+TRANSMISSION CONTROL PROTOCOL (4) 
+   | Source port number: 49748 (0x c254)
+   | Destination port number: 80 (0x 0050)
+   | Sequence number: 156729816 (0x 095781d8)
+   | Acknowledgment number: 2468862267 (0x 9327d93b)
+   | THL: 20 (0x 5) (without option)
+   | Reserved: 0 (0x 0) 
+   | Flags : 
+      | NS  = 0
+      | CWR = 0
+      | ECE = 0
+      | URG = 0
+      | ACK = 1
+      | PSH = 1
+      | RST = 0
+      | SYN = 0
+      | FIN = 0
+   | Window: 1024 (0x 0400)
+   | Checksum: 21124 (0x 5284)
+   | Urgent pointer: 0 (0x 0000)
+
+HYPERTEXT TRANSFER PROTOCOL (7) 
+   | GET /favicon.ico HTTP/1.1
+   | Accept: */*
+   | UA-CPU: AMD64
+   | Accept-Encoding: gzip, deflate
+   | User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; Win64; x64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)
+   | Host: mozilla.org
+   | Connection: Keep-Alive
+   | 
+   | 
+
+--------------------------------- TRAME 3 ---------------------------------
+ETHERNET (2) 
+   | Destination MAC address : 40.ec.99.b8.aa.e2 (0x 40 ec 99 b8 aa e2)
+   | Source MAC address : 70.fc.8f.9a.97.c5 (0x 70 fc 8f 9a 97 c5)
+   | EtherType : Internet Protocol version 4 - IPv4 (0x 08 00)
+
+INTERNET PROTOCOL VERSION 4 (3) 
+   | Version: 4 (0x 4)
+   | IP Header Length: 20 (0x 5) (without option)
+   | Type Of Service: Ox00 
+   | Total Length: 456 (0x 01c8)
+   | Identification: 45897 (0x b349)
+   | Flags :(0x 4)
+      | DF = 1
+      | MF = 0
+   | Fragment Offset : 0 (0x 000)
+   | TTL : 218 (0x da)
+   | Protocol : 6 - TCP (0x 06)
+   | Header Checksum : 741361 (0x b4 f1)
+   | Source IP address : 44.236.72.93  (0x 2c ec 48 5d) 
+   | Destination IP address : 192.168.1.3  (0x c0 a8 01 03) 
+
+TRANSMISSION CONTROL PROTOCOL (4) 
+   | Source port number: 80 (0x 0050)
+   | Destination port number: 49749 (0x c255)
+   | Sequence number: 2277693864 (0x 87c2d9a8)
+   | Acknowledgment number: 1148915087 (0x 447b0d8f)
+   | THL: 20 (0x 5) (without option)
+   | Reserved: 0 (0x 0) 
+   | Flags : 
+      | NS  = 0
+      | CWR = 0
+      | ECE = 0
+      | URG = 0
+      | ACK = 1
+      | PSH = 1
+      | RST = 0
+      | SYN = 0
+      | FIN = 0
+   | Window: 219 (0x 00db)
+   | Checksum: 13001 (0x 32c9)
+   | Urgent pointer: 0 (0x 0000)
+
+HYPERTEXT TRANSFER PROTOCOL (7) 
+   | HTTP/1.1 308 Permanent Redirect
+   | Date: Thu, 10 Dec 2020 09:15:16 GMT
+   | Content-Type: text/html
+   | Content-Length: 164
+   | Connection: keep-alive
+   | Location: https://mozilla.org/
+   | X-Frame-Options: SAMEORIGIN
+   | Content-Security-Policy: frame-ancestors 'none'
+   | 
+   | 
+
+--------------------------------- TRAME 4 ---------------------------------
+ETHERNET (2) 
+   | Destination MAC address : 40.ec.99.b8.aa.e2 (0x 40 ec 99 b8 aa e2)
+   | Source MAC address : 70.fc.8f.9a.97.c5 (0x 70 fc 8f 9a 97 c5)
+   | EtherType : Internet Protocol version 4 - IPv4 (0x 08 00)
+
+INTERNET PROTOCOL VERSION 4 (3) 
+   | Version: 4 (0x 4)
+   | IP Header Length: 20 (0x 5) (without option)
+   | Type Of Service: Ox00 
+   | Total Length: 467 (0x 01d3)
+   | Identification: 54398 (0x d47e)
+   | Flags :(0x 4)
+      | DF = 1
+      | MF = 0
+   | Fragment Offset : 0 (0x 000)
+   | TTL : 216 (0x d8)
+   | Protocol : 6 - TCP (0x 06)
+   | Header Checksum : 613297 (0x 95 b1)
+   | Source IP address : 44.236.72.93  (0x 2c ec 48 5d) 
+   | Destination IP address : 192.168.1.3  (0x c0 a8 01 03) 
+
+TRANSMISSION CONTROL PROTOCOL (4) 
+   | Source port number: 80 (0x 0050)
+   | Destination port number: 49748 (0x c254)
+   | Sequence number: 2468862267 (0x 9327d93b)
+   | Acknowledgment number: 156730117 (0x 09578305)
+   | THL: 20 (0x 5) (without option)
+   | Reserved: 0 (0x 0) 
+   | Flags : 
+      | NS  = 0
+      | CWR = 0
+      | ECE = 0
+      | URG = 0
+      | ACK = 1
+      | PSH = 1
+      | RST = 0
+      | SYN = 0
+      | FIN = 0
+   | Window: 219 (0x 00db)
+   | Checksum: 525 (0x 020d)
+   | Urgent pointer: 0 (0x 0000)
+
+HYPERTEXT TRANSFER PROTOCOL (7) 
+   | HTTP/1.1 308 Permanent Redirect
+   | Date: Thu, 10 Dec 2020 09:15:16 GMT
+   | Content-Type: text/html
+   | Content-Length: 164
+   | Connection: keep-alive
+   | Location: https://mozilla.org/favicon.ico
+   | X-Frame-Options: SAMEORIGIN
+   | Content-Security-Policy: frame-ancestors 'none'
+   | 
+   | 
+
+--------------------------------- TRAME 5 ---------------------------------
+ETHERNET (2) 
+   | Destination MAC address : 70.fc.8f.9a.97.c5 (0x 70 fc 8f 9a 97 c5)
+   | Source MAC address : 40.ec.99.b8.aa.e2 (0x 40 ec 99 b8 aa e2)
+   | EtherType : Internet Protocol version 6 - IPv6 (0x 86 dd)
+
+--------------------------------- TRAME 6 ---------------------------------
+ETHERNET (2) 
+   | Destination MAC address : 40.ec.99.b8.aa.e2 (0x 40 ec 99 b8 aa e2)
+   | Source MAC address : 70.fc.8f.9a.97.c5 (0x 70 fc 8f 9a 97 c5)
+   | EtherType : Internet Protocol version 4 - IPv4 (0x 08 00)
+
+INTERNET PROTOCOL VERSION 4 (3) 
+   | Version: 4 (0x 4)
+   | IP Header Length: 20 (0x 5) (without option)
+   | Type Of Service: Ox00 
+   | Total Length: 52 (0x 0034)
+   | Identification: 0 (0x 0000)
+   | Flags :(0x 4)
+      | DF = 1
+      | MF = 0
+   | Fragment Offset : 0 (0x 000)
+   | TTL : 233 (0x e9)
+   | Protocol : 6 - TCP (0x 06)
+   | Header Checksum : 986312 (0x f0 c8)
+   | Source IP address : 3.213.219.122  (0x 03 d5 db 7a) 
+   | Destination IP address : 192.168.1.3  (0x c0 a8 01 03) 
+
+TRANSMISSION CONTROL PROTOCOL (4) 
+   | Source port number: 443 (0x 01bb)
+   | Destination port number: 49201 (0x c031)
+   | Sequence number: 2140871258 (0x 7f9b1a5a)
+   | Acknowledgment number: 1510638396 (0x 5a0a833c)
+   | THL: 32 (0x 8) (with option)
+   | Reserved: 0 (0x 0) 
+   | Flags : 
+      | NS  = 0
+      | CWR = 0
+      | ECE = 0
+      | URG = 0
+      | ACK = 1
+      | PSH = 0
+      | RST = 0
+      | SYN = 1
+      | FIN = 0
+   | Window: 26883 (0x 6903)
+   | Checksum: 11225 (0x 2bd9)
+   | Urgent pointer: 0 (0x 0000)
+   | Option : 
+      | Type : 2 - Maximum segment size (MSS) (0x 02) 
+         | Length : 4  (0x 04) 
+      | Type : 1 - No Operation (NOP) (0x 01) 
+      | Type : 1 - No Operation (NOP) (0x 01) 
+      | Type : 4 - Selective Acknowledgement permitted (0x 04) 
+         | Length : 2  (0x 02) 
+      | Type : 1 - No Operation (NOP) (0x 01) 
+      | Type : 3 - Window scale (0x 03) 
+         | Length : 3  (0x 03) 

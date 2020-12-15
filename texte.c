@@ -6,7 +6,7 @@
 #include "texte.h"
 #include "conversion.h"
 
-#define TAILLE_MAX 6000
+#define TAILLE_MAX 100000
 
 
 int verification_octet(char ** octet){
@@ -47,7 +47,13 @@ int verification_octet(char ** octet){
 }
 
 int verification_offset(char * offset, int nb_mot_lprec){
-	int offset_dec = hex_to_dec(offset);
+	if(strlen(offset) < 2){
+        return -1;
+    }
+    int offset_dec = hex_to_dec(offset);
+    if(offset_dec == 0){
+        return 1;
+    }
 	return (offset_dec == nb_mot_lprec);	
 }
 
@@ -73,6 +79,11 @@ int verification_ligne(char * ligne, int * pcpt_mot, int cpt_ligne){
         	if (!v_off){ //si l'offset est faux par rapport aux lignes précédentes
                 return 0; //on sort de la boucle et retourne 0
         	}else{
+                if((v_off != -1) && (hex_to_dec(mot) == 0)){
+                    cpt_mot = 0;
+                    *(pcpt_mot) = 0;
+                    ecrire_fichier(nomFichierW, "\r");
+                }
         		cpt_mot++;  
         	}
         }
@@ -86,7 +97,6 @@ int verification_ligne(char * ligne, int * pcpt_mot, int cpt_ligne){
                     removeChar(mot, '\n');
                     removeChar(mot, '\r');
                     printf("Erreur d'octet ''%s'' à la ligne %d \n", mot, cpt_ligne);
-                    printf("Veuillez vérifier la trame donnée en entrée\n");
                 }
             }else{ //mots vides (lorsqu'on a plusieurs espaces d'affilés)
                 cpt_mot_vide++;
@@ -97,25 +107,32 @@ int verification_ligne(char * ligne, int * pcpt_mot, int cpt_ligne){
     free(del);
     return 1;
 }
-//fonction permet de verifier que la trame donnee est bien formatee et retourne une trame avec un offset de 0x10 octets par ligne 
+//fonction permet de verifier que la trame donnee est bien formatee et ecrit dans le fichier Sortie.txt la trame brute (sans offset)
 void verification_trame(char * trame_init, int nbL){
 	int cpt_mot = 0;
     int cpt_ligne = 1;
 	//parcourt de notre trame 
 	char *del,*trame_tmp,*ligne;
     del = trame_tmp = strdup(trame_init);
+    int cpt_err = 0;
     //identification d'une ligne
+    printf("\n--------------------------------- WARNING /ERROR ---------------------------------\n");
     while( (ligne = strsep(&trame_tmp,"\n")) != NULL) {
         int res = verification_ligne(ligne, &cpt_mot, cpt_ligne);
         if(!res && cpt_ligne < nbL){
             removeChar(ligne, '\n');
             removeChar(ligne, '\r');
-            printf("Erreur d'offset, ligne %d ignorée : %s \n", cpt_ligne, ligne);
+            printf("Erreur d'offset, ligne %d ignorée \n", cpt_ligne);
+            cpt_err++;
         }
         cpt_ligne++;
+    }
+    if(!cpt_err){
+        printf("Aucune erreur :)\n");
+    }else{
+        printf("Veuillez vérifier la trame donnée en entrée\n");
     }
     free(del);
 	return; 
 }
-
 

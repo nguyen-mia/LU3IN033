@@ -4,7 +4,7 @@
 #include "conversion.h"
 #include "trame.h"
 
-#define TAILLE_MAX 6000
+#define TAILLE_MAX 100000
 
 void affiche_addr(char * addr_hex, int len_addr){
 	char *octet;

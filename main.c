@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "texte.h"
 #include "fichier.h"
 #include "trame.h"
@@ -18,24 +19,18 @@ int main(int argc, char *argv[])
 	verification_trame(res,nbL);
 	
 	//Décodage de la trame
-	char * trame_traitee ;
+	char *trame_traitee, *trame ;
 	nbL = compter_lignes(nomFichierW);
 	trame_traitee = lire_fichier(nomFichierW, &nbL);
-	ethernet(trame_traitee);
-    
+	int cpt_trame = 1;
+	while( (trame = strsep(&trame_traitee,"\r")) != NULL) {
+        if(strlen(trame) >2) {
+        	printf("\n--------------------------------- TRAME %d ---------------------------------", cpt_trame);
+        	ethernet(trame);
+        	cpt_trame++;
+        }
+    }
     free(res);
     free(trame_traitee);
-    /*
-	char test[]= "hello"
-	while( (ligne = strsep(&trame_tmp,"l")) != NULL) {
-        int res = verification_ligne(ligne, &cpt_mot, cpt_ligne);
-        if(!res && cpt_ligne < nbL){
-            removeChar(ligne, '\n');
-            removeChar(ligne, '\r');
-            printf("Erreur d'offset, ligne %d ignorée : %s \n", cpt_ligne, ligne);
-        }
-        cpt_ligne++;
-    }
-	return; */
 	return 0;
 }
