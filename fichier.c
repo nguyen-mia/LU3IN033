@@ -52,11 +52,11 @@ void ecrire_fichier(char *nomFichier, char * texte){
 	FILE *pt_fichier = NULL;
 	pt_fichier = fopen(nomFichier, "a");
 	if (pt_fichier == NULL) {
-    	fprintf (stderr, "Impossible d'ouvrir %s \n", nomFichier);
-   		return;
-  	}
-  	fprintf(pt_fichier, "%s \n",texte);
-  	fclose(pt_fichier);
+   	fprintf (stderr, "Impossible d'ouvrir %s \n", nomFichier);
+  	return;
+  }
+  fprintf(pt_fichier, "%s \n",texte);
+ 	fclose(pt_fichier);
 	return;
 }
 

@@ -8,8 +8,8 @@
 
 void affiche_addr(char * addr_hex, int len_addr){
 	char *octet;
-    char *add_tmp;
-    add_tmp = strdup(addr_hex);
+    char *del,*add_tmp;
+    del = add_tmp = strdup(addr_hex);
     int cpt_tmp = 0; 
     while( ((octet = strsep(&add_tmp," ")) != NULL) && (cpt_tmp != len_addr)) {
        	if(len_addr == 4) {
@@ -23,6 +23,7 @@ void affiche_addr(char * addr_hex, int len_addr){
        	cpt_tmp++;
     }
     printf(" ");
+    free(del);
     return;
 }
 
@@ -136,7 +137,8 @@ void TCP(char * trame){
     int flags1 = hex_to_dec(tcp_flags);
     printf("   | Flags : \n");
     printf("      | NS  = %d\n", NS);
-    int * flags_bin = decToBinary(flags1);
+    int *del,*flags_bin;
+    del = flags_bin = decToBinary(flags1);
     printf("      | CWR = %d\n", flags_bin[3]);
     printf("      | ECE = %d\n", flags_bin[2]);
     printf("      | URG = %d\n", flags_bin[1]);
@@ -146,11 +148,12 @@ void TCP(char * trame){
     //Flags 2
     strncpy(tcp_flags, trame_tmp, 1);
     int flags2 = hex_to_dec(tcp_flags);
-    flags_bin = decToBinary(flags2);
+    del = flags_bin = decToBinary(flags2);
     printf("      | PSH = %d\n", flags_bin[3]);
     printf("      | RST = %d\n", flags_bin[2]);
     printf("      | SYN = %d\n", flags_bin[1]);
     printf("      | FIN = %d\n", flags_bin[0]);
+    free(del);
     trame_tmp = trame_tmp + 2;
 
     //Window
@@ -305,11 +308,13 @@ void IPv4(char * trame){
     memset(ip_Fl, '\0', 2); 
     strncpy(ip_Fl, trame_tmp, 1);
     removeChar(ip_Fl, ' ');
-    int * flags_bin = decToBinary(hex_to_dec(ip_Fl));
+    int * del, *flags_bin;
+    del = flags_bin = decToBinary(hex_to_dec(ip_Fl));
     printf("   | Flags :(0x %s)\n", ip_Fl);
     printf("      | DF = %d\n", flags_bin[2]);
     printf("      | MF = %d\n", flags_bin[1]);
     int frag = flags_bin[0];    
+    free(del);
     trame_tmp = trame_tmp + 1;
 
     //Fragment Offset

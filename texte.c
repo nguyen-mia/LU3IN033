@@ -9,7 +9,7 @@
 #define TAILLE_MAX 6000
 
 
-int verification_octet(char ** octet, int cpt_mot_ligne){
+int verification_octet(char ** octet){
     int i = 0, len;
     char * octet2 = *octet;
     len = strlen(*octet);
@@ -53,15 +53,14 @@ int verification_offset(char * offset, int nb_mot_lprec){
 
 int verification_ligne(char * ligne, int * pcpt_mot, int cpt_ligne){
 	char * nomFichierW = "Sortie.txt";
-	char *trame_tmp,*mot;
+	char *del,*trame_tmp,*mot;
 	int cpt_mot = *(pcpt_mot); //cpt de mots total dans la trame
 	int nb_mot_lprec;
 	int v_off; 
     int v_oct;
-    int cpt_mot_vide = 0;
-    int cpt_mot_ligne = 0; //cpt de mot dans chaque ligne
+    int cpt_mot_vide = 0; //espaces séparant l'offset et les octets ainsi que les octets et les valeurs textuelles
 
-	trame_tmp = strdup(ligne);
+	del = trame_tmp = strdup(ligne);
 
 	while( (mot = strsep(&trame_tmp," ")) != NULL ){
         nb_mot_lprec = cpt_mot;
@@ -75,20 +74,19 @@ int verification_ligne(char * ligne, int * pcpt_mot, int cpt_ligne){
                 return 0; //on sort de la boucle et retourne 0
         	}else{
         		cpt_mot++;  
-                cpt_mot_ligne++;
         	}
         }
         else{ //ensuite on verifie chaque octet
-        	v_oct = verification_octet(&mot, cpt_mot_ligne);
+        	v_oct = verification_octet(&mot);
         	if (v_oct != -1){
                 if(v_oct == 1){ //octet bien formaté
                     ecrire_fichier_octet(nomFichierW, mot);
                     cpt_mot++; 
-                    cpt_mot_ligne++;
                 }else{ // octet mal formaté
                     removeChar(mot, '\n');
                     removeChar(mot, '\r');
-                    printf("Erreur d'octet ''%s'' à la ligne %d, octet ignoré\n", mot, cpt_ligne);
+                    printf("Erreur d'octet ''%s'' à la ligne %d \n", mot, cpt_ligne);
+                    printf("Veuillez vérifier la trame donnée en entrée\n");
                 }
             }else{ //mots vides (lorsqu'on a plusieurs espaces d'affilés)
                 cpt_mot_vide++;
@@ -96,6 +94,7 @@ int verification_ligne(char * ligne, int * pcpt_mot, int cpt_ligne){
         }      
     }
     *(pcpt_mot) = cpt_mot - 1;
+    free(del);
     return 1;
 }
 //fonction permet de verifier que la trame donnee est bien formatee et retourne une trame avec un offset de 0x10 octets par ligne 
@@ -103,15 +102,20 @@ void verification_trame(char * trame_init, int nbL){
 	int cpt_mot = 0;
     int cpt_ligne = 1;
 	//parcourt de notre trame 
-	char *trame_tmp,*ligne;
-    trame_tmp = strdup(trame_init);
+	char *del,*trame_tmp,*ligne;
+    del = trame_tmp = strdup(trame_init);
     //identification d'une ligne
     while( (ligne = strsep(&trame_tmp,"\n")) != NULL) {
         int res = verification_ligne(ligne, &cpt_mot, cpt_ligne);
         if(!res && cpt_ligne < nbL){
-            printf("Erreur d'offset, ligne %d ignorée : %s ", cpt_ligne, ligne);
+            removeChar(ligne, '\n');
+            removeChar(ligne, '\r');
+            printf("Erreur d'offset, ligne %d ignorée : %s \n", cpt_ligne, ligne);
         }
         cpt_ligne++;
     }
+    free(del);
 	return; 
 }
+
+
