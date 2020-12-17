@@ -1,0 +1,13 @@
+
+######## DESCRIPTION DE LA STRUCTURE DU CODE ########
+
+Notre programme est divisée en 3 étapes 
+
+1/ Lecture des entrées 
+Il s'agit de l'étape de traitement des trames données en entrées, dans laquelle une première lecture du fichier Trame.txt est 	faite grâce à l'appel de la fonction lire_fichier() qui retourne un char * contenant tout le fichier. Cette étape utilise surtout les fonctions définies dans fichier.c et fichier.h
+
+2/ Traitement des entrées 
+Cette étape permet de traiter les données, vérifier les offsets de chaque ligne et ignorer les valeurs textuelles à la fin de ligne à travers l'appel de la fonction verification_trame(). Suite à cet appel, on retrouve dans le fichier TrameBrute.txt un ensemble de trames brutes, sans offset, séparés par un \r. Cette étape utilise surtout les fonctions définies dans texte.c et texte.h
+
+3/ Décodage et affichage des trames
+L'étape 3 permet de vraiment décoder les trames. A partir du fichier TrameBrute.txt, nous allons suivre le format d'un paquet Ethernet pour ensuite décoder chaque champs en appelant la fonction ethernet(). Si la trame utilise un protocol qui n'est pas supporté par notre programme, le terminal va afficher "Protocol not supported". Cette étape utilise surtout les fonctions définies dans texte.c et texte.h 

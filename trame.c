@@ -4,8 +4,6 @@
 #include "conversion.h"
 #include "trame.h"
 
-#define TAILLE_MAX 100000
-
 void affiche_addr(char * addr_hex, int len_addr){
 	char *octet;
     char *del,*add_tmp;
@@ -26,7 +24,6 @@ void affiche_addr(char * addr_hex, int len_addr){
     free(del);
     return;
 }
-
 
 void HTTP(char * trame){
     char *trame_tmp;
@@ -143,6 +140,7 @@ void TCP(char * trame){
     printf("      | ECE = %d\n", flags_bin[2]);
     printf("      | URG = %d\n", flags_bin[1]);
     printf("      | ACK = %d\n", flags_bin[0]);
+    free(del);
     trame_tmp = trame_tmp + 1;
 
     //Flags 2
@@ -247,13 +245,11 @@ void TCP(char * trame){
     if ((port_no_s == 80) ||  port_no_d == 80){ //HTTP
         HTTP(trame_tmp);
     }
-
 	return;
 }
 
 void IPv4(char * trame){
-	char *trame_tmp;
-	trame_tmp = trame;
+	char *trame_tmp = trame;
 	printf("\nINTERNET PROTOCOL VERSION 4 (3) \n");
 	
 	//Version
@@ -442,6 +438,8 @@ void IPv4(char * trame){
     //Data 
     if(Protocol == 6){
         TCP(trame_tmp);
+    }else{
+        printf("\nProtocol not supported\n");
     }
     return; 
 }
@@ -453,21 +451,19 @@ void ethernet(char * trame){
 	printf("\nETHERNET (2) \n");
     
     //Destination address
-    char eth_add_d[18];
-    memset(eth_add_d, '\0', 18); 
-    strncpy(eth_add_d, trame_tmp, 17);
+    char eth_add[18];
+    memset(eth_add, '\0', 18); 
+    strncpy(eth_add, trame_tmp, 17);
     printf("   | Destination MAC address : ");
-    affiche_addr(eth_add_d, 6);
-    printf("(0x %s)\n", eth_add_d);
+    affiche_addr(eth_add, 6);
+    printf("(0x %s)\n", eth_add);
     trame_tmp = trame_tmp + 18;
 
     //Source address
-    char eth_add_s[18];
-    memset(eth_add_s, '\0', 18); 
-    strncpy(eth_add_s, trame_tmp, 17);
+    strncpy(eth_add, trame_tmp, 17);
     printf("   | Source MAC address : ");
-    affiche_addr(eth_add_s, 6);
-    printf("(0x %s)\n", eth_add_s);
+    affiche_addr(eth_add, 6);
+    printf("(0x %s)\n", eth_add);
     trame_tmp = trame_tmp + 18;
 
     //Type 
@@ -494,6 +490,8 @@ void ethernet(char * trame){
     //Data (IPv4)
     if(ipV4){
         IPv4(trame_tmp);
+    }else{
+        printf("\nProtocol not supported\n");
     }
 	return; 
 }

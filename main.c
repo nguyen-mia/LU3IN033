@@ -8,16 +8,16 @@
 
 int main(int argc, char *argv[])
 {	
-	char * res; 
-	char * nomFichierR = "Entree.txt";
-	char * nomFichierW = "Sortie.txt";
+	char *res; 
+	char * nomFichierR = "Trame.txt";
+	char * nomFichierW = "TrameBrute.txt";
 	//Lecture de la trame
 	int nbL = compter_lignes(nomFichierR);
 	res = lire_fichier(nomFichierR, &nbL);
 	//Traitement de la trame 
 	clean_fichier(nomFichierW); 
 	verification_trame(res,nbL);
-	
+
 	//Décodage de la trame
 	char *trame_traitee, *trame ;
 	nbL = compter_lignes(nomFichierW);

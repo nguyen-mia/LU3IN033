@@ -6,7 +6,7 @@
 #include "texte.h"
 #include "conversion.h"
 
-#define TAILLE_MAX 100000
+#define TAILLE_MAX 5000
 
 
 int verification_octet(char ** octet){
@@ -58,7 +58,7 @@ int verification_offset(char * offset, int nb_mot_lprec){
 }
 
 int verification_ligne(char * ligne, int * pcpt_mot, int cpt_ligne){
-	char * nomFichierW = "Sortie.txt";
+	char * nomFichierW = "TrameBrute.txt";
 	char *del,*trame_tmp,*mot;
 	int cpt_mot = *(pcpt_mot); //cpt de mots total dans la trame
 	int nb_mot_lprec;
@@ -71,7 +71,7 @@ int verification_ligne(char * ligne, int * pcpt_mot, int cpt_ligne){
 	while( (mot = strsep(&trame_tmp," ")) != NULL ){
         nb_mot_lprec = cpt_mot;
         //on verifie l'offset d'abord
-        if(cpt_mot_vide > 3){ //début des valeurs textuelles à la fin de ligne
+        if(cpt_mot_vide > 2){ //début des valeurs textuelles à la fin de ligne
             break;
         }
         if (cpt_mot == *(pcpt_mot)){
@@ -96,7 +96,7 @@ int verification_ligne(char * ligne, int * pcpt_mot, int cpt_ligne){
                 }else{ // octet mal formaté
                     removeChar(mot, '\n');
                     removeChar(mot, '\r');
-                    printf("Erreur d'octet ''%s'' à la ligne %d \n", mot, cpt_ligne);
+                    printf("Erreur d'octet à la ligne %d, %s ignoré \n", cpt_ligne, mot);
                 }
             }else{ //mots vides (lorsqu'on a plusieurs espaces d'affilés)
                 cpt_mot_vide++;
@@ -107,7 +107,7 @@ int verification_ligne(char * ligne, int * pcpt_mot, int cpt_ligne){
     free(del);
     return 1;
 }
-//fonction permet de verifier que la trame donnee est bien formatee et ecrit dans le fichier Sortie.txt la trame brute (sans offset)
+//fonction permet de verifier que la trame donnee est bien formatee et ecrit dans le fichier TrameBrute.txt la trame brute (sans offset)
 void verification_trame(char * trame_init, int nbL){
 	int cpt_mot = 0;
     int cpt_ligne = 1;
@@ -116,7 +116,7 @@ void verification_trame(char * trame_init, int nbL){
     del = trame_tmp = strdup(trame_init);
     int cpt_err = 0;
     //identification d'une ligne
-    printf("\n--------------------------------- WARNING /ERROR ---------------------------------\n");
+    printf("\n----------------------------- WARNING / ERROR -----------------------------\n");
     while( (ligne = strsep(&trame_tmp,"\n")) != NULL) {
         int res = verification_ligne(ligne, &cpt_mot, cpt_ligne);
         if(!res && cpt_ligne < nbL){
@@ -127,10 +127,8 @@ void verification_trame(char * trame_init, int nbL){
         }
         cpt_ligne++;
     }
-    if(!cpt_err){
-        printf("Aucune erreur :)\n");
-    }else{
-        printf("Veuillez vérifier la trame donnée en entrée\n");
+    if(cpt_err){
+        printf("Veuillez vérifier les trames données en entrée\n");
     }
     free(del);
 	return; 

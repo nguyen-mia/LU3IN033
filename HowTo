@@ -1,0 +1,23 @@
+######## COMMENT INSTALLER ET LANCER LE PROGRAMME ########
+
+1/ Ouvrir un terminal et se placer dans le répertoire du projet
+
+2/ Taper "make all" pour faire la compilation et l'édition de liens des fichiers 
+
+3/ Copier-coller vos trames Ethernet dans le fichier Trame.txt 
+
+4/ Sauvegarder bien le contenu du fichier Trame.txt
+
+5/ Exécuter en programme en tappant : 
+	- "./main | tee Output.txt" si vous souhaitez garder une trace des résultats dans le fichier Output.txt
+	- "./main" sinon
+
+6/ Les résultats vont s'afficher sur le terminal (et dans le fichier Output.txt si vous avez taper l'option "| tee")
+
+7/ A chaque fois que vous changez les trames, il suffit de retaper la commande de l'étape 5 pour faire une nouvelle analyse de vos trames
+
+Voici la liste des protocoles supportés par notre programme : 
+	- Couche 2 : Ethernet 
+	- Couche 3 : Internet Protocol Version 4
+	- Couche 4 : TCP 
+	- Couche 7 : HTTP (uniquement l’entête des requêtes et réponses)

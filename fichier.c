@@ -5,10 +5,9 @@
 #include "fichier.h"
 
 
-#define BUFFER 100000
-#define TAILLE_MAX 100000
+#define LIGNE_MAX 5000
+#define TAILLE_MAX 5000
 
-#define LIGNE_MAX 100000
 
 int compter_lignes(char *nomFichier){
 	FILE *pFi;
@@ -28,7 +27,7 @@ int compter_lignes(char *nomFichier){
 }
 
 char * lire_fichier(char *nomFichier, int * p_nbL){
-  char ligne_lue[BUFFER];
+  char ligne_lue[LIGNE_MAX];
   FILE * pt_f= NULL;  
   pt_f = fopen (nomFichier, "r") ;
   if (pt_f == NULL) {
@@ -39,7 +38,7 @@ char * lire_fichier(char *nomFichier, int * p_nbL){
   char * res = NULL;
   res = (char *) malloc(sizeof(char) * TAILLE_MAX);
 
-  while ((fgets(ligne_lue, BUFFER, pt_f))) {
+  while ((fgets(ligne_lue, LIGNE_MAX, pt_f))) {
   	strcat(res, ligne_lue);
   }	
   strcat(res, "\n");

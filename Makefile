@@ -22,4 +22,4 @@ fichier.o: fichier.c fichier.h
 
 
 clean:
-	rm -rf *.o
+	rm -rf *.o main
